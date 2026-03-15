@@ -1,0 +1,15 @@
+#? https://github.com/sxyazi/yazi/blob/main/yazi-config/preset/yazi-default.toml
+"$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
+
+#? https://yazi-rs.github.io/docs/configuration/yazi/#mgr.linemode
+[mgr]
+linemode = "size_and_mtime"
+
+[plugin]
+prepend_previewers = [
+	{ mime = "image/*", run = "noop" },
+	{ mime = "video/*", run = "noop" },
+	{ mime = "application/pdf", run = "noop" },
+	{ mime = "font/*", run = "noop" },
+	{ mime = "application/ms-opentype", run = "noop" },
+]

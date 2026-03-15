@@ -1,0 +1,130 @@
+#? docs (vercel): https://helix-editor.vercel.app/configuration/editor
+[editor]
+line-number = "relative"
+auto-format = false
+color-modes = true       # display NOR INS SEL modes in lhs status bar
+bufferline = "multiple"  # show bufferline (tabs) only if more than one buffer
+cursorline = true
+
+[editor.file-picker]
+hidden = false      # allow hidden files
+git-exclude = false # allow .git/info/exclude files
+
+### Keymaps
+#? inspiration: https://github.com/LGUG2Z/helix-vim/blob/master/config.toml
+#? docs (vercel): https://helix-editor.vercel.app/reference/keymap
+#? docs (main): https://docs.helix-editor.com/keymap.html
+[keys.normal]
+## vim-like behavior
+"{" = ["goto_prev_paragraph", "extend_visual_line_up"]
+"}" = ["goto_next_paragraph"]
+"0" = "extend_to_line_start"
+"$" = "extend_to_line_end"
+"^" = "extend_to_first_nonwhitespace"
+"%" = ["collapse_selection", "select_mode", "match_brackets", "normal_mode"]
+"-" = ":format"
+C-r = "redo"
+G = "goto_file_end"
+D = "extend_to_line_end"
+X = "extend_line_above"
+V = ["select_mode", "extend_to_line_bounds"]
+
+## Search for word under cursor
+"*" = [
+  "move_char_right",
+  "move_prev_word_start",
+  "move_next_word_end",
+  "search_selection",
+  "search_next",
+]
+"#" = [
+  "move_char_right",
+  "move_prev_word_start",
+  "move_next_word_end",
+  "search_selection",
+  "search_prev",
+]
+
+## always i/a at current cursor position
+i = ["collapse_selection", "insert_mode"]
+a = ["collapse_selection", "append_mode"]
+
+## personal preference
+C-s = ":w"                # default: save_selection to jumplist (remapped to 'M')
+M = "save_selection"
+left = "jump_view_left"
+right = "jump_view_right"
+up = "jump_view_up"
+down = "jump_view_down"
+
+## lazygit support with A-g
+A-g = [
+  ":write-all",
+  ":new",
+  ":insert-output lazygit",
+  ":buffer-close!",
+  ":redraw",
+  ":reload-all",
+]
+
+A-r = [
+  ":write-all",
+  ":insert-output scooter >/dev/tty",
+  ":redraw",
+  ":reload-all",
+]
+
+## Escape the madness! No more fighting with the cursor! Or with multiple cursors!
+esc = ["collapse_selection", "keep_primary_selection"]
+
+### space bar menu commands
+[keys.normal."space"]
+"%" = "select_all"            # select entire file like helix default behavior
+"J" = "join_selections_space" # alt-J conflicts with zellij, or doesn't work with ghostty
+# git blame https://github.com/helix-editor/helix/discussions/6421#discussioncomment-12486943
+B = ":sh git log -n 5 --format='format:%%h (%%an: %%ar) %%s' --no-patch -L%{cursor_line},+1:%{buffer_name}"
+
+# open yazi inline
+e = [
+  ":sh rm -f /tmp/_hx_yazi_buffer",
+  ":insert-output yazi '%{buffer_name}' --chooser-file=/tmp/_hx_yazi_buffer",
+  ":insert-output echo \"x1b[?1049h\" > /dev/tty",
+  ":open %sh{cat /tmp/_hx_yazi_buffer}",
+  ":redraw",
+  ":set mouse false",
+  ":set mouse true",
+]
+
+[keys.select]
+## vim-like behavior
+"{" = ["goto_prev_paragraph", "extend_visual_line_up"]
+"}" = ["goto_next_paragraph"]
+"0" = "extend_to_line_start"
+"$" = "extend_to_line_end"
+"^" = "extend_to_first_nonwhitespace"
+"%" = ["collapse_selection", "select_mode", "match_brackets", "normal_mode"]
+"-" = ":format"
+C-r = "redo"
+G = "goto_file_end"
+D = "extend_to_line_end"
+X = "extend_line_above"
+V = ["select_mode", "extend_to_line_bounds"]
+
+## personal preference
+C-s = ":w"
+M = "save_selection"
+left = "jump_view_left"
+right = "jump_view_right"
+up = "jump_view_up"
+down = "jump_view_down"
+
+## always i/a at current cursor position
+i = ["collapse_selection", "insert_mode"]
+a = ["collapse_selection", "append_mode"]
+
+## Escape the madness! No more fighting with the cursor! Or with multiple cursors!
+esc = ["collapse_selection", "keep_primary_selection", "normal_mode"]
+
+[keys.insert]
+C-s = ["collapse_selection", "keep_primary_selection", "normal_mode", ":w"]
+C-x = "completion"

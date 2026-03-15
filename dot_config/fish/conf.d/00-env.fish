@@ -1,0 +1,3 @@
+set -gx SHELL $(which fish)
+set -gx HOMEBREW_NO_ENV_HINTS 1
+set -gx EDITOR vi
