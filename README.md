@@ -15,6 +15,7 @@ docker run -it --rm debian
 ```
 
 ```
+rm -f /.dockerenv && \
 apt update && \
 apt install curl vim -y && \
 /bin/bash -c "$(curl -fsLS https://raw.githubusercontent.com/dom1153/dotfiles-slim/refs/heads/main/scripts/install_debian.sh)"

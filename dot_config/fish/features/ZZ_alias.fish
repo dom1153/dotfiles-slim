@@ -9,3 +9,5 @@ abbr_safe -v la "ls -laho"
 abbr_safe -v mv 'mv -i'
 abbr_safe -v pwd 'pwd --physical'
 abbr_safe -v rm 'rm -i'
+
+abbr_safe -ev brew 'sudo -u linuxbrew -i'

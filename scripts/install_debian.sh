@@ -33,6 +33,15 @@ command_exists() {
     command -v "$1" &> /dev/null
 }
 
+setup_brew_permissions() {
+  $SUDO apt update
+  $SUDO apt install sudo -y
+  useradd -m -s /bin/bash linuxbrew
+  echo "linuxbrew ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/linuxbrew
+  rm -f /home/linuxbrew/.bashrc
+  echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"' >> /home/linuxbrew/.bashrc
+}
+
 install_brew() {
   # Use sudo if available and not root
   SUDO=""
@@ -43,7 +52,7 @@ install_brew() {
   $SUDO apt update
   $SUDO apt install build-essential procps curl file git -y
 
-  NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  sudo -u linuxbrew NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
   cat <<'EOF' >> "$HOME"/.bashrc
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
@@ -59,7 +68,7 @@ EOF
 }
 
 install_essential() {
-  brew install chezmoi helix fish yazi lazygit
+  sudo -u linuxbrew -i brew install chezmoi helix fish yazi lazygit
   success "hx, yazi, lazygit, chezmoi installed"
 }
 
@@ -69,6 +78,7 @@ init_chezmoi() {
 }
 
 main() {
+  setup_brew_permissions
   install_brew
   install_essential
   init_chezmoi
