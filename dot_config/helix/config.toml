@@ -1,4 +1,6 @@
 #? docs (vercel): https://helix-editor.vercel.app/configuration/editor
+theme = "base16_default"
+
 [editor]
 line-number = "relative"
 auto-format = false
