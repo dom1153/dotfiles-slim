@@ -20,3 +20,14 @@ apt update && \
 apt install curl vim -y && \
 /bin/bash -c "$(curl -fsLS https://raw.githubusercontent.com/dom1153/dotfiles-slim/refs/heads/main/scripts/install_debian.sh)"
 ```
+
+## Core script (debian)
+
+```
+sudo apt install build-essential procps curl file git -y
+NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)" >> "$HOME"/.bashrc
+brew install chezmoi helix fish yazi lazygit difft
+chezmoi init --apply dom1153/dotfiles-slim
+exec fish
+```

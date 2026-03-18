@@ -68,8 +68,8 @@ EOF
 }
 
 install_essential() {
-  sudo -u linuxbrew -i brew install chezmoi helix fish yazi lazygit
-  success "hx, yazi, lazygit, chezmoi installed"
+  sudo -u linuxbrew -i brew install chezmoi helix fish yazi lazygit difft
+  success "essential apps installed"
 }
 
 init_chezmoi() {
