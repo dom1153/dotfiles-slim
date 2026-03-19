@@ -27,7 +27,7 @@ apt install curl vim -y && \
 sudo apt install build-essential procps curl file git -y
 NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)" >> "$HOME"/.bashrc
-brew install chezmoi helix fish yazi lazygit difft
+brew install chezmoi helix fish yazi lazygit difftastic
 chezmoi init --apply dom1153/dotfiles-slim
 exec fish
 ```
