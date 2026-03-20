@@ -9,6 +9,15 @@ if exists yazi
     end
 end
 
+if exists atuin
+    atuin init fish --disable-up-arrow | source
+end
+
+if exists zoxide
+    zoxide init --cmd cd fish | source
+end
+
 if exists hx
     set -gx EDITOR hx
 end
+

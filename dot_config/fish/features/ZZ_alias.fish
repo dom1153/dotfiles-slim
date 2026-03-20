@@ -14,4 +14,4 @@ abbr_safe -e lg lazygit
 abbr_safe ca 'chezmoi apply'
 abbr_safe cu 'chezmoi update'
 
-# abbr_safe -ev brew 'sudo -u linuxbrew -i'
+# abbr_safe -ev brew 'sudo -u linuxbrew -i brew'
