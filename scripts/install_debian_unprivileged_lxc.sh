@@ -57,6 +57,10 @@ install_brew() {
   cat <<'EOF' >> "$HOME"/.bashrc
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
 
+if command -v starship &> /dev/null; then
+    eval "$(starship init bash)"
+fi
+
 if [[ $- == *i* ]] && [[ "$SHELL" != *fish* ]] && [ -n "$PS1" ] && [[ "$(tty)" == /dev/* ]] && [[ $(command -v fish) ]]; then
     exec fish
 fi
@@ -68,7 +72,7 @@ EOF
 }
 
 install_essential() {
-  sudo -u linuxbrew -i brew install chezmoi helix fish yazi lazygit difftastic
+  sudo -u linuxbrew -i brew install chezmoi helix fish yazi lazygit difftastic starship zellij
   success "essential apps installed"
 }
 

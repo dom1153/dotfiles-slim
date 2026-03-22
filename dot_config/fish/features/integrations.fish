@@ -16,8 +16,13 @@ end
 if exists zoxide
     zoxide init --cmd cd fish | source
 end
+    
+if exists starship
+    # should remove warning for git branch taking too long to load
+    set -gx STARSHIP_LOG error
+    starship init fish | source
+end
 
 if exists hx
     set -gx EDITOR hx
 end
-

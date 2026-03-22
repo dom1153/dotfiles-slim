@@ -1,0 +1,54 @@
+keybinds {
+    shared_except "locked" {
+        bind "Alt c" { NewPane; }
+        bind "Alt f" { ToggleFocusFullscreen; }
+        bind "Alt /" "Ctrl /" { ToggleFloatingPanes; }
+        bind "Ctrl alt q" { Quit; }
+        unbind "Alt o" // MoveTab "Left"
+        unbind "Alt i" // MoveTab "Right"
+    }
+    session {
+        bind "Ctrl q" { SwitchToMode "Normal"; }
+    }
+    shared_except "locked" "session" {
+        bind "Ctrl q" { SwitchToMode "session"; }
+        bind "Ctrl q" { SwitchToMode "session"; }
+        unbind "Ctrl o"
+    }
+    shared_except "locked" "scroll" "search" {
+        bind "Ctrl y" { SwitchToMode "scroll"; }
+        unbind "Ctrl s"
+    }
+    shared_among "scroll" "search" {
+        bind "Ctrl y" { SwitchToMode "normal"; }
+        unbind "Ctrl s"
+    }
+}
+
+plugins {
+    about location="zellij:about"
+    compact-bar location="zellij:compact-bar"
+    configuration location="zellij:configuration"
+    filepicker location="zellij:strider" {
+        cwd "/"
+    }
+    plugin-manager location="zellij:plugin-manager"
+    session-manager location="zellij:session-manager"
+    status-bar location="zellij:status-bar"
+    strider location="zellij:strider"
+    tab-bar location="zellij:tab-bar"
+    welcome-screen location="zellij:session-manager" {
+        welcome_screen true
+    }
+}
+
+load_plugins {
+}
+
+show_startup_tips false
+simplified_ui true
+pane_frames false
+
+/// Use if terminal does not support OSC 52
+/// In a pinch, try Shift + LMB + (ctrl+shift+c)
+// copy_command "wl-copy"
